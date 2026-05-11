@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Bebas_Neue, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, Geist_Mono } from "next/font/google";
 import { SHOP } from "@/config/shop";
 import "./globals.css";
 
@@ -9,16 +9,16 @@ const inter = Inter({
   display: "swap",
 });
 
-const bebas = Bebas_Neue({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bebas",
+  variable: "--font-inter-tight",
   display: "swap",
+  weight: ["700", "800", "900"],
 });
 
-const jetbrains = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${inter.variable} ${bebas.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${inter.variable} ${interTight.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

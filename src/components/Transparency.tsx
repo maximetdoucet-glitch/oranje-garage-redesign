@@ -1,48 +1,79 @@
 import { SHOP } from "@/config/shop";
+import SectionHeader from "./SectionHeader";
 
 export default function Transparency() {
   const t = SHOP.transparency;
   return (
-    <section className="relative border-b border-border bg-bg-elevated">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <div className="mb-20 max-w-3xl">
-          <div className="mono mb-4 flex items-center gap-3 text-[11px] tracking-[0.25em] text-fg-muted">
-            <span className="inline-block h-px w-10 bg-accent-red" />
-            {t.eyebrow}
-          </div>
-          <h2 className="display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95]">
-            {t.headlineLines[0]}
-            <br />
-            <span className="text-accent-red">{t.headlineLines[1]}</span>
-          </h2>
-          <p className="mt-8 max-w-xl text-lg text-fg-muted">{t.intro}</p>
-        </div>
+    <section className="relative overflow-hidden border-b border-line bg-bg">
+      <div className="mx-auto w-full max-w-[1400px] px-6 py-28 md:px-12 md:py-40">
+        <SectionHeader
+          number="03"
+          eyebrow="HOE WIJ WERKEN"
+          line1={t.headlineLines[0]}
+          line2={t.headlineLines[1]}
+          aside={t.intro}
+        />
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+        {/* Process timeline */}
+        <div className="relative mt-24 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* Connecting line on desktop */}
+          <span
+            aria-hidden
+            className="absolute left-0 right-0 top-[3.25rem] hidden h-px bg-gradient-to-r from-transparent via-line-strong to-transparent lg:block"
+          />
           {t.steps.map((s, i) => (
             <div key={s.step} className="relative">
-              {i < t.steps.length - 1 && (
-                <span className="absolute right-0 top-6 hidden h-px w-1/2 bg-border lg:block" />
-              )}
-              <div className="display text-7xl text-accent-red">{s.step}</div>
-              <h3 className="display mt-6 text-2xl tracking-wide">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-fg-muted">{s.desc}</p>
+              <div className="mb-8 flex items-center gap-4">
+                <span
+                  className="display flex h-14 w-14 items-center justify-center bg-bg-card text-2xl text-accent ring-1 ring-line-strong"
+                  style={{ color: "var(--accent)" }}
+                >
+                  {s.step}
+                </span>
+                <span className="stripe-sig" aria-hidden>
+                  <span />
+                </span>
+              </div>
+              <h3 className="display text-2xl md:text-3xl tracking-tight">
+                {s.title}
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-fg-body">
+                {s.desc}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-sm border border-accent-red/30 bg-bg p-8 md:flex-row md:items-center md:p-12">
-          <div>
-            <div className="mono text-[11px] tracking-[0.25em] text-accent-red">{t.guarantee.label}</div>
-            <h3 className="display mt-3 text-3xl md:text-4xl">{t.guarantee.title}</h3>
-            <p className="mt-3 text-sm text-fg-muted md:max-w-xl">{t.guarantee.desc}</p>
+        {/* Guarantee card */}
+        <div className="relative mt-24 overflow-hidden border border-line-strong bg-bg-card">
+          <div
+            aria-hidden
+            className="absolute -right-32 -top-32 h-80 w-80 rounded-full blur-[100px]"
+            style={{ background: "var(--accent)", opacity: 0.12 }}
+          />
+          <div className="relative flex flex-col items-start justify-between gap-8 p-10 md:flex-row md:items-center md:p-14">
+            <div className="max-w-2xl">
+              <div className="mono mb-4 flex items-center gap-3 text-[10px] tracking-[0.3em] text-accent">
+                <span className="stripe-sig" aria-hidden>
+                  <span />
+                </span>
+                {t.guarantee.label}
+              </div>
+              <h3 className="display text-3xl md:text-5xl tracking-tight leading-[1]">
+                {t.guarantee.title}
+              </h3>
+              <p className="mt-5 text-base text-fg-body md:max-w-xl">
+                {t.guarantee.desc}
+              </p>
+            </div>
+            <a
+              href={t.guarantee.ctaHref}
+              className="btn-magnetic inline-flex items-center gap-3 rounded-none border border-accent bg-accent px-8 py-5 text-[12px] font-bold uppercase tracking-[0.15em] text-black"
+            >
+              {t.guarantee.ctaLabel.replace(" →", "")}
+              <span aria-hidden>→</span>
+            </a>
           </div>
-          <a
-            href={t.guarantee.ctaHref}
-            className="shrink-0 rounded-full bg-accent-red px-7 py-4 text-sm font-medium text-bg transition-transform hover:scale-[1.02]"
-          >
-            {t.guarantee.ctaLabel}
-          </a>
         </div>
       </div>
     </section>

@@ -1,10 +1,13 @@
 import { SHOP } from "@/config/shop";
+import SectionHeader from "./SectionHeader";
 
 function Stars({ n }: { n: number }) {
   return (
-    <div className="mono flex gap-0.5 text-sm" aria-label={`${n} sterren`}>
+    <div className="flex gap-1 text-xs" aria-label={`${n} sterren`}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className={i < n ? "text-accent-red" : "text-border"}>★</span>
+        <span key={i} style={{ color: i < n ? "var(--accent)" : "var(--line-strong)" }}>
+          ★
+        </span>
       ))}
     </div>
   );
@@ -13,43 +16,62 @@ function Stars({ n }: { n: number }) {
 export default function Reviews() {
   const r = SHOP.reviews;
   return (
-    <section id="reviews" className="border-b border-border bg-bg">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <div className="mono mb-4 flex items-center gap-3 text-[11px] tracking-[0.25em] text-fg-muted">
-              <span className="inline-block h-px w-10 bg-accent-red" />
-              {r.eyebrow}
-            </div>
-            <h2 className="display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95]">
-              {r.headlineLines[0]}
-              <br />
-              <span className="text-accent-red">{r.headlineLines[1]}</span>
-            </h2>
-          </div>
+    <section
+      id="reviews"
+      className="relative overflow-hidden border-b border-line bg-bg-soft"
+    >
+      <div className="mx-auto w-full max-w-[1400px] px-6 py-28 md:px-12 md:py-40">
+        <SectionHeader
+          number="04"
+          eyebrow="REVIEWS · KLANTEN"
+          line1={r.headlineLines[0]}
+          line2={r.headlineLines[1]}
+          aside="Wij doen geen reclame. Onze klanten doen dat voor ons — al jaren, op elk platform waar wij genoemd worden."
+        />
+
+        <div className="mt-20 grid grid-cols-1 gap-px overflow-hidden bg-line md:grid-cols-2 lg:grid-cols-3">
+          {r.items.map((rev, i) => (
+            <article
+              key={rev.name}
+              className="group relative flex flex-col gap-6 bg-bg p-8 md:p-10"
+            >
+              <div className="flex items-center justify-between">
+                <Stars n={rev.rating} />
+                <span className="mono text-[9px] tracking-[0.3em] text-fg-muted">
+                  / 0{i + 1}
+                </span>
+              </div>
+              <p className="text-base leading-relaxed text-fg-strong">
+                &ldquo;{rev.text}&rdquo;
+              </p>
+              <div className="mt-auto flex items-end justify-between border-t border-line-strong pt-5">
+                <div>
+                  <div className="display text-xl tracking-tight">{rev.name}</div>
+                  <div className="mono mt-1 text-[10px] tracking-[0.2em] text-fg-muted">
+                    {rev.when.toUpperCase()}
+                  </div>
+                </div>
+                <span
+                  className="mono text-fg-dim transition-colors group-hover:text-accent"
+                  aria-hidden
+                >
+                  ★
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
           <a
             href={r.googleUrl}
             target="_blank"
             rel="noopener"
-            className="mono text-[11px] tracking-[0.2em] text-fg-muted underline-offset-4 hover:text-fg hover:underline"
+            className="inline-flex items-center gap-3 border border-line-strong px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-fg transition-colors hover:border-accent hover:text-accent"
           >
-            ALLE REVIEWS OP GOOGLE →
+            Alle 33 reviews bekijken
+            <span aria-hidden>→</span>
           </a>
-        </div>
-
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-sm bg-border md:grid-cols-2 lg:grid-cols-3">
-          {r.items.map((rev) => (
-            <article key={rev.name} className="flex flex-col gap-5 bg-bg p-7">
-              <Stars n={rev.rating} />
-              <p className="text-sm leading-relaxed text-fg">&ldquo;{rev.text}&rdquo;</p>
-              <div className="mt-auto flex items-end justify-between border-t border-border pt-4">
-                <div className="display text-xl">{rev.name}</div>
-                <div className="mono text-[10px] tracking-[0.2em] text-fg-muted">
-                  {rev.when.toUpperCase()}
-                </div>
-              </div>
-            </article>
-          ))}
         </div>
       </div>
     </section>

@@ -140,9 +140,9 @@ export const SHOP: ShopConfig = {
       "Geen anonieme garage. Wij kennen elke Volvo van binnen en buiten — van de eerste 240 GL tot de nieuwste hybride XC60. U weet wie uw sleutel pakt.",
     images: [
       "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1599256871679-bd2cd03dd76b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=900&q=80",
     ],
     team: [
