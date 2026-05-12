@@ -1,5 +1,6 @@
 import { SHOP } from "@/config/shop";
 import Link from "next/link";
+import Wordmark from "./Wordmark";
 
 export default function Footer() {
   const f = SHOP.footer;
@@ -35,13 +36,8 @@ export default function Footer() {
         {/* Main grid */}
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <span className="inline-block h-6 w-6 rounded-sm bg-accent" />
-              <span className="display text-2xl tracking-wider">
-                ORANJE GARAGE
-              </span>
-            </div>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-muted">
+            <Wordmark variant="inline" size="lg" />
+            <p className="mt-7 max-w-sm text-sm leading-relaxed text-fg-muted">
               {f.tagline}
             </p>
           </div>
