@@ -4,130 +4,105 @@ import SectionHeader from "./SectionHeader";
 export default function Contact() {
   const c = SHOP.contact;
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden border-b border-line bg-bg-soft"
-    >
-      <div className="mx-auto w-full max-w-[1400px] px-6 py-28 md:px-12 md:py-40">
+    <section id="contact" className="bg-bg-soft">
+      <div className="mx-auto w-full max-w-[1500px] px-6 py-28 md:px-12 md:py-40">
         <SectionHeader
           number="06"
-          eyebrow="CONTACT · BEZOEK ONS"
+          eyebrow="Contact · Bezoek ons"
           line1={c.headlineLines[0]}
           line2={c.headlineLines[1]}
         />
 
-        <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Left col */}
-          <div className="space-y-12 lg:col-span-5">
-            <div>
-              <div className="mono mb-3 text-[10px] tracking-[0.3em] text-fg-muted">
-                / ADRES
-              </div>
-              <div className="display text-3xl tracking-tight">
+        <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-12">
+          {/* Left col: info */}
+          <div className="space-y-16 lg:col-span-5">
+            <div className="border-t border-line-strong pt-8">
+              <div className="label">— Adres</div>
+              <div className="serif mt-6 text-3xl tracking-[-0.02em]">
                 {c.address.line1}
               </div>
-              <div className="display text-3xl tracking-tight text-fg-muted">
+              <div className="serif text-3xl text-fg-muted tracking-[-0.02em]">
                 {c.address.line2}
               </div>
               <a
                 href={c.mapsUrl}
                 target="_blank"
                 rel="noopener"
-                className="mono mt-4 inline-flex items-center gap-2 text-[11px] tracking-[0.25em] text-accent underline-offset-4 hover:underline"
+                className="tlink mt-6 inline-flex text-sm"
+                style={{ color: "var(--accent)" }}
               >
-                ROUTE OPENEN <span aria-hidden>→</span>
+                Route openen <span aria-hidden>→</span>
               </a>
             </div>
 
-            <div className="grid grid-cols-1 gap-px overflow-hidden bg-line sm:grid-cols-2">
-              <div className="bg-bg p-8">
-                <div className="mono text-[10px] tracking-[0.3em] text-fg-muted">
-                  / TELEFOON
-                </div>
-                <a
-                  href={c.phoneHref}
-                  className="display mt-4 block text-2xl tracking-tight hover:text-accent"
-                >
-                  {c.phoneDisplay}
-                </a>
-              </div>
-              <div className="bg-bg p-8">
-                <div className="mono text-[10px] tracking-[0.3em] text-fg-muted">
-                  / WHATSAPP
-                </div>
-                <a
-                  href={c.whatsappHref}
-                  className="display mt-4 block text-2xl tracking-tight hover:text-accent"
-                >
-                  Direct bericht →
-                </a>
-              </div>
-              <div className="bg-bg p-8 sm:col-span-2">
-                <div className="mono text-[10px] tracking-[0.3em] text-fg-muted">
-                  / E-MAIL
-                </div>
-                <a
-                  href={`mailto:${c.email}`}
-                  className="display mt-4 block text-xl tracking-tight hover:text-accent"
-                >
-                  {c.email}
-                </a>
-              </div>
+            <div className="border-t border-line-strong pt-8">
+              <div className="label">— Telefoon & WhatsApp</div>
+              <a
+                href={c.phoneHref}
+                className="serif mt-6 block text-3xl tracking-[-0.02em] hover:text-accent"
+              >
+                {c.phoneDisplay}
+              </a>
+              <a
+                href={c.whatsappHref}
+                className="tlink tlink--rev mt-3 inline-flex text-sm"
+              >
+                WhatsApp direct bericht <span aria-hidden>→</span>
+              </a>
             </div>
 
-            <div>
-              <div className="mono mb-5 text-[10px] tracking-[0.3em] text-fg-muted">
-                / OPENINGSTIJDEN
-              </div>
-              <div className="border-l border-line-strong">
+            <div className="border-t border-line-strong pt-8">
+              <div className="label">— E-mail</div>
+              <a
+                href={`mailto:${c.email}`}
+                className="serif mt-6 block text-2xl tracking-[-0.02em] hover:text-accent"
+              >
+                {c.email}
+              </a>
+            </div>
+
+            <div className="border-t border-line-strong pt-8">
+              <div className="label">— Openingstijden</div>
+              <dl className="mt-6">
                 {c.hours.map(([day, hours]) => (
                   <div
                     key={day}
-                    className="flex items-center justify-between border-b border-line-strong py-3 pl-5 pr-2 last:border-b-0"
+                    className="flex items-baseline justify-between border-b border-line py-3 last:border-b-0"
                   >
-                    <span className="text-sm text-fg-body">{day}</span>
-                    <span
-                      className="mono text-sm tracking-wide"
+                    <dt className="text-base text-fg-body">{day}</dt>
+                    <dd
+                      className="text-base"
                       style={
                         hours === "Gesloten"
                           ? { color: "var(--fg-dim)" }
-                          : undefined
+                          : { color: "var(--fg)" }
                       }
                     >
                       {hours}
-                    </span>
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </div>
           </div>
 
-          {/* Right col — map */}
+          {/* Right col: map (kept light treatment) */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-square overflow-hidden border border-line-strong lg:aspect-auto lg:h-full">
+            <div className="relative aspect-square overflow-hidden border border-line-strong lg:aspect-auto lg:h-full lg:min-h-[640px]">
               <iframe
                 title="Locatie"
                 src={c.osmEmbed}
                 className="absolute inset-0 h-full w-full"
-                style={{
-                  filter:
-                    "invert(0.94) hue-rotate(180deg) grayscale(1) contrast(1.15)",
-                }}
+                style={{ filter: "grayscale(0.9) contrast(0.95) sepia(0.06)" }}
                 loading="lazy"
               />
-              {/* Overlay card */}
-              <div className="absolute bottom-6 left-6 right-6 border border-line-strong bg-bg/90 p-6 backdrop-blur-md md:max-w-sm">
-                <div className="mono mb-3 flex items-center gap-3 text-[10px] tracking-[0.3em] text-fg-muted">
-                  <span className="stripe-sig" aria-hidden>
-                    <span />
-                  </span>
-                  · COÖRDINATEN ·
-                </div>
-                <div className="display text-2xl tracking-tight">
+              <div className="absolute bottom-6 left-6 right-6 bg-bg/95 p-6 backdrop-blur-md md:max-w-sm">
+                <div className="label">— Coördinaten</div>
+                <div className="serif-italic mt-3 text-2xl tracking-[-0.02em]">
                   {c.coordinates}
                 </div>
                 <div
-                  className="mono mt-3 text-[10px] tracking-[0.25em]"
+                  className="label mt-3"
                   style={{ color: "var(--accent)" }}
                 >
                   {c.parkingNote}

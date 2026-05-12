@@ -4,105 +4,66 @@ import SectionHeader from "./SectionHeader";
 export default function Werkplaats() {
   const w = SHOP.werkplaats;
   return (
-    <section
-      id="werkplaats"
-      className="relative overflow-hidden border-b border-line bg-bg-soft"
-    >
-      <div className="mx-auto w-full max-w-[1400px] px-6 py-28 md:px-12 md:py-40">
+    <section id="werkplaats" className="bg-bg-soft">
+      <div className="mx-auto w-full max-w-[1500px] px-6 py-28 md:px-12 md:py-40">
         <SectionHeader
           number="02"
-          eyebrow="WERKPLAATS · HET TEAM"
+          eyebrow="Werkplaats"
           line1={w.headlineLines[0]}
           line2={w.headlineLines[1]}
           aside={w.intro}
         />
 
-        {/* Editorial gallery — asymmetric layout */}
-        <div className="mt-20 grid grid-cols-12 gap-3 md:gap-4">
-          <div className="col-span-12 md:col-span-7 md:row-span-2">
-            <figure className="relative aspect-[5/4] overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={w.images[0]}
-                alt="Werkplaats interieur"
-                className="h-full w-full object-cover grayscale contrast-125 transition-all duration-700 hover:scale-[1.03] hover:grayscale-0"
-              />
-              <figcaption className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                <span className="mono bg-bg/80 px-3 py-1.5 text-[10px] tracking-[0.3em] text-fg backdrop-blur">
-                  · WERKPLAATS · NIJMEGEN-OOST
-                </span>
-                <span className="stripe-sig" aria-hidden>
-                  <span />
-                </span>
-              </figcaption>
-            </figure>
-          </div>
-          <div className="col-span-6 md:col-span-5">
-            <div className="aspect-square overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={w.images[1]}
-                alt=""
-                className="h-full w-full object-cover grayscale contrast-125 transition-all duration-700 hover:scale-[1.05] hover:grayscale-0"
-              />
-            </div>
-          </div>
-          <div className="col-span-6 md:col-span-5">
-            <div className="aspect-square overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={w.images[2]}
-                alt=""
-                className="h-full w-full object-cover grayscale contrast-125 transition-all duration-700 hover:scale-[1.05] hover:grayscale-0"
-              />
-            </div>
-          </div>
-          <div className="col-span-12 md:col-span-6">
-            <div className="aspect-[16/9] overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={w.images[3]}
-                alt=""
-                className="h-full w-full object-cover grayscale contrast-125 transition-all duration-700 hover:scale-[1.05] hover:grayscale-0"
-              />
-            </div>
-          </div>
-          <div className="col-span-12 md:col-span-6">
-            <div className="aspect-[16/9] overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={w.images[4]}
-                alt=""
-                className="h-full w-full object-cover grayscale contrast-125 transition-all duration-700 hover:scale-[1.05] hover:grayscale-0"
-              />
+        {/* Full-bleed primary image */}
+        <div className="img-hover relative mt-20 aspect-[16/9] w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={w.images[0]}
+            alt="Werkplaats Oranje Garage"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute bottom-6 left-6 bg-bg/90 px-5 py-3 backdrop-blur-sm">
+            <div className="label">Werkplaats · Nijmegen-Oost</div>
+            <div className="serif-italic mt-1 text-xl">
+              Prof. Schrijnenstraat 2
             </div>
           </div>
         </div>
 
-        {/* Team cards */}
-        <div className="mt-24">
-          <div className="mono mb-6 flex items-center gap-3 text-[10px] tracking-[0.3em] text-fg-muted">
-            <span className="stripe-sig" aria-hidden>
-              <span />
-            </span>
-            · MONTEURS ·
-          </div>
-          <div className="grid grid-cols-1 gap-px overflow-hidden bg-line md:grid-cols-3">
+        {/* 4-image strip */}
+        <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {w.images.slice(1).map((src, i) => (
+            <div
+              key={i}
+              className="img-hover relative aspect-square overflow-hidden"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Team — editorial cards */}
+        <div className="mt-32">
+          <div className="label mb-12">— Monteurs</div>
+          <div className="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-3">
             {w.team.map((p, i) => (
-              <div key={p.name} className="group bg-bg p-10">
-                <div className="mono flex items-center justify-between text-[10px] tracking-[0.3em] text-fg-muted">
-                  <span>/ 0{i + 1}</span>
-                  <span
-                    className="text-accent"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {p.years.toUpperCase()}
-                  </span>
-                </div>
-                <h3 className="display mt-12 text-3xl md:text-4xl tracking-tight">
+              <div key={p.name} className="border-t border-line-strong pt-8">
+                <div className="label">— 0{i + 1}</div>
+                <h3 className="serif mt-6 text-3xl tracking-[-0.02em] md:text-4xl">
                   {p.name}
                 </h3>
-                <p className="mt-3 text-sm text-fg-body">{p.role}</p>
+                <p className="mt-3 text-sm font-light text-fg-body">{p.role}</p>
+                <div
+                  className="label mt-6"
+                  style={{ color: "var(--accent)" }}
+                >
+                  {p.years} ervaring
+                </div>
               </div>
             ))}
           </div>

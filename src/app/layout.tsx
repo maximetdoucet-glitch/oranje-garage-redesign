@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, Geist_Mono } from "next/font/google";
+import { Inter, Instrument_Serif, Geist_Mono } from "next/font/google";
 import { SHOP } from "@/config/shop";
 import "./globals.css";
 
@@ -7,13 +7,15 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
 });
 
-const interTight = Inter_Tight({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-instrument",
   display: "swap",
-  weight: ["700", "800", "900"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 const geistMono = Geist_Mono({
@@ -33,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${inter.variable} ${interTight.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${instrument.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

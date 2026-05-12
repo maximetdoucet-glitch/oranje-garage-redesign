@@ -1,48 +1,46 @@
 /**
- * SectionHeader
- * ─────────────────────────────────
- * Consistent treatment across all sections:
- *  - section number (huge faded bg label)
- *  - stripe + eyebrow
- *  - 2-line display headline (line 2 oranje)
- *  - optional aside paragraph
+ * Section header — light editorial.
+ * Eyebrow label + serif headline + optional aside.
+ * No giant background numbers, no stripe gimmicks.
  */
 export default function SectionHeader({
   number,
   eyebrow,
   line1,
   line2,
+  italic2 = true,
   aside,
 }: {
   number: string;
   eyebrow: string;
   line1: string;
   line2: string;
+  italic2?: boolean;
   aside?: string;
 }) {
   return (
-    <div className="relative">
-      <div className="section-num -top-12 -left-4 md:-left-8" aria-hidden>
-        {number}
-      </div>
-      <div className="relative z-[1] flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-        <div>
-          <div className="mono mb-6 flex items-center gap-3 text-[10px] tracking-[0.3em] text-fg-muted">
-            <span className="stripe-sig" aria-hidden>
-              <span />
-            </span>
-            {eyebrow}
-          </div>
-          <h2 className="display text-[clamp(2.75rem,7vw,6rem)] leading-[0.92]">
-            {line1}
-            <br />
-            <span className="text-accent">{line2}</span>
-          </h2>
+    <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end md:gap-16">
+      <div className="max-w-3xl">
+        <div className="label flex items-center gap-3">
+          <span className="text-fg-muted">— {number}</span>
+          <span>{eyebrow}</span>
         </div>
-        {aside && (
-          <p className="max-w-md text-fg-body leading-relaxed">{aside}</p>
-        )}
+        <h2 className="serif mt-8 text-[clamp(2.5rem,5.5vw,5rem)] leading-[1.02] tracking-[-0.025em]">
+          {line1}
+          <br />
+          <span
+            className={italic2 ? "serif-italic" : "serif"}
+            style={{ color: "var(--accent)" }}
+          >
+            {line2}
+          </span>
+        </h2>
       </div>
+      {aside && (
+        <p className="max-w-sm text-base font-light leading-relaxed text-fg-body md:text-right">
+          {aside}
+        </p>
+      )}
     </div>
   );
 }

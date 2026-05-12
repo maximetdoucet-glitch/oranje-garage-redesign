@@ -4,156 +4,140 @@ import Wordmark from "./Wordmark";
 export default function Hero() {
   const h = SHOP.hero;
   return (
-    <section className="grain relative isolate min-h-screen overflow-hidden border-b border-line bg-bg">
-      {/* Background image — full bleed, treated */}
-      <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={h.image}
-          alt=""
-          className="h-full w-full object-cover opacity-[0.35] grayscale contrast-125"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.85) 60%, #000 100%)",
-          }}
-        />
-        {/* Orange edge glow */}
-        <div
-          className="absolute -right-40 top-1/3 h-[500px] w-[500px] rounded-full opacity-[0.18] blur-[120px]"
-          style={{ background: "var(--accent)" }}
-        />
-      </div>
-
+    <section className="relative isolate min-h-screen overflow-hidden bg-bg">
       {/* Top nav */}
-      <header className="relative z-20 mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 pt-8 md:px-12">
-        <Wordmark size="md" />
-        <nav className="hidden items-center gap-10 text-sm text-fg-body md:flex">
-          <a className="transition-colors hover:text-fg" href="#diensten">Diensten</a>
-          <a className="transition-colors hover:text-fg" href="#werkplaats">Werkplaats</a>
-          <a className="transition-colors hover:text-fg" href="#reviews">Reviews</a>
-          <a className="transition-colors hover:text-fg" href="#contact">Contact</a>
-        </nav>
-        <a
-          href="#boek"
-          className="btn-magnetic inline-flex items-center gap-2 rounded-none border border-accent bg-accent px-5 py-3 text-[12px] font-bold uppercase tracking-[0.15em] text-black"
-        >
-          APK boeken
-          <span aria-hidden>→</span>
-        </a>
+      <header className="absolute inset-x-0 top-0 z-30">
+        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-6 pt-8 md:px-12 md:pt-10">
+          <Wordmark size="md" />
+          <nav className="hidden items-center gap-10 text-sm text-fg-body md:flex">
+            {[
+              ["Diensten", "#diensten"],
+              ["Werkplaats", "#werkplaats"],
+              ["Reviews", "#reviews"],
+              ["Contact", "#contact"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} className="tlink tlink--rev">
+                {label}
+              </a>
+            ))}
+          </nav>
+          <a
+            href="#boek"
+            className="tlink hidden md:inline-flex"
+            style={{ color: "var(--accent)" }}
+          >
+            APK boeken
+            <span aria-hidden>→</span>
+          </a>
+        </div>
       </header>
 
-      {/* Hero content */}
-      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-200px)] w-full max-w-[1400px] flex-col justify-center px-6 pb-24 pt-20 md:px-12 md:pt-32">
-        {/* Eyebrow */}
-        <div className="mono mb-10 flex items-center gap-4 text-[11px] tracking-[0.3em] text-fg-muted rise">
-          <span className="stripe-sig" aria-hidden>
-            <span />
-          </span>
-          {h.eyebrow}
-        </div>
-
-        {/* Massive display headline */}
-        <h1
-          className="display text-[clamp(4rem,12vw,12rem)] leading-[0.86] tracking-[-0.04em] rise"
-          style={{ animationDelay: "0.1s" }}
-        >
-          {h.headlineLines[0]}
-          <br />
-          {h.headlineLines[1]}
-          <br />
-          <span className="text-accent">{h.headlineLines[2]}</span>
-        </h1>
-
-        {/* Lower row: copy left, stat card right */}
-        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-16">
-          <div
-            className="md:col-span-5 rise"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <p className="text-lg leading-relaxed text-fg-body md:text-xl">
-              {h.sub}
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <a
-                href={h.primaryCta.href}
-                className="btn-magnetic inline-flex items-center gap-3 rounded-none border border-accent bg-accent px-8 py-5 text-[12px] font-bold uppercase tracking-[0.15em] text-black"
-              >
-                {h.primaryCta.label}
-                <span aria-hidden>→</span>
-              </a>
-              <a
-                href={h.secondaryCta.href}
-                className="inline-flex items-center gap-3 rounded-none border border-line-strong px-8 py-5 text-[12px] font-bold uppercase tracking-[0.15em] text-fg transition-colors hover:border-accent hover:text-accent"
-              >
-                <span
-                  className="inline-block h-2 w-2"
-                  style={{ background: "var(--accent)" }}
-                />
-                {h.secondaryCta.label}
-              </a>
-            </div>
+      {/* Hero content — two-column editorial */}
+      <div className="mx-auto grid min-h-screen w-full max-w-[1500px] grid-cols-1 px-6 pt-32 md:grid-cols-12 md:gap-12 md:px-12 md:pt-40">
+        {/* Left col: editorial text */}
+        <div className="md:col-span-6 md:py-20">
+          <div className="rise">
+            <div className="label">— Volvo Specialist · Sinds 1998</div>
           </div>
 
-          {/* Stat card — right side */}
+          <h1
+            className="rise serif mt-10 text-[clamp(3.5rem,8vw,8rem)] leading-[0.95] tracking-[-0.03em]"
+            style={{ animationDelay: "0.1s" }}
+          >
+            Volvo verdient
+            <br />
+            een{" "}
+            <span className="serif-italic" style={{ color: "var(--accent)" }}>
+              specialist.
+            </span>
+            <br />
+            Niet een dealer.
+          </h1>
+
+          <p
+            className="rise mt-10 max-w-md text-lg font-light leading-relaxed text-fg-body"
+            style={{ animationDelay: "0.2s" }}
+          >
+            Onafhankelijk Volvo-specialist in Nijmegen-Oost. Originele
+            Volvo-onderdelen, dealer-kwaliteit, zonder dealer-prijzen.
+            Klassieke 240 of moderne XC60 — wij kennen ze.
+          </p>
+
           <div
-            className="md:col-span-7 md:flex md:items-end md:justify-end rise"
+            className="rise mt-12 flex flex-wrap items-center gap-8"
             style={{ animationDelay: "0.3s" }}
           >
-            <div className="w-full max-w-md border-l border-accent bg-bg-card/40 p-8 backdrop-blur-md">
-              <div className="mono mb-6 flex items-center justify-between text-[10px] tracking-[0.3em] text-fg-muted">
-                <span>{h.statCard.label}</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                  LIVE
-                </span>
+            <a
+              href="#boek"
+              className="inline-flex items-center gap-3 bg-fg px-8 py-4 text-sm font-medium text-bg transition-all hover:bg-accent"
+            >
+              Onderhoud boeken
+              <span aria-hidden>→</span>
+            </a>
+            <a href="tel:+31243231346" className="tlink text-sm">
+              <span
+                className="inline-block h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--accent)" }}
+              />
+              024 — 323 13 46
+            </a>
+          </div>
+
+          {/* Trust strip */}
+          <div
+            className="rise mt-20 grid max-w-md grid-cols-2 gap-y-6 border-t border-line-strong pt-8"
+            style={{ animationDelay: "0.4s" }}
+          >
+            {h.trustBadges.map((b) => (
+              <div key={b.k}>
+                <div className="serif text-2xl">{b.k}</div>
+                <div className="label mt-1">{b.v}</div>
               </div>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <div className="display text-6xl leading-none tracking-tight">
-                    {h.statCard.leftNum}
-                  </div>
-                  <div
-                    className="mono mt-3 text-[10px] tracking-[0.25em] text-fg-muted"
-                    dangerouslySetInnerHTML={{ __html: h.statCard.leftLabel }}
-                  />
-                </div>
-                <div>
-                  <div
-                    className="display text-6xl leading-none tracking-tight"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {h.statCard.rightNum}
-                  </div>
-                  <div className="mono mt-3 text-[10px] tracking-[0.25em] text-fg-muted">
-                    {h.statCard.rightLabel}
-                  </div>
-                </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right col: dominant photo */}
+        <div className="relative md:col-span-6">
+          <div
+            className="img-hover relative aspect-[3/4] w-full overflow-hidden md:absolute md:inset-y-0 md:right-0 md:aspect-auto md:h-full md:w-[55vw]"
+            style={{ animationDelay: "0.2s" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85"
+              alt="Volvo werkplaats"
+              className="h-full w-full object-cover"
+            />
+            {/* Caption overlay */}
+            <figcaption className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+              <div className="bg-bg/90 px-4 py-2 backdrop-blur-sm">
+                <div className="label">Werkplaats · Nijmegen-Oost</div>
+                <div className="serif-italic mt-1 text-lg">51.83°N · 5.87°E</div>
               </div>
-              <div className="mt-8 border-t border-line-strong pt-6">
-                <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-xs">
-                  {h.trustBadges.map((b) => (
-                    <div key={b.k} className="flex items-baseline gap-2">
-                      <span className="display text-sm tracking-[0.1em]">
-                        {b.k}
-                      </span>
-                      <span className="mono text-[9px] tracking-[0.15em] text-fg-muted">
-                        {b.v}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </figcaption>
           </div>
         </div>
       </div>
 
-      {/* Side coordinates — vertical right edge */}
-      <div className="mono pointer-events-none absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rotate-90 text-[10px] tracking-[0.4em] text-fg-dim md:block">
-        {h.coordinates}
+      {/* Bottom strip */}
+      <div className="relative z-10 border-t border-line bg-bg">
+        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-6 py-5 md:px-12">
+          <div className="label">Maandag tot Vrijdag · 08:00 — 17:00</div>
+          <div className="label hidden md:block">
+            240 · 740 · 850 · S60 · V70 · XC60 · XC70 · XC90 · V40 · V90
+          </div>
+          <div
+            className="label flex items-center gap-2"
+            style={{ color: "var(--accent)" }}
+          >
+            <span
+              className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
+              style={{ background: "var(--accent)" }}
+            />
+            OPEN
+          </div>
+        </div>
       </div>
     </section>
   );

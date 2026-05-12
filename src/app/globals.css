@@ -1,32 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  /* Canvas */
-  --bg: #000000;
-  --bg-soft: #0a0a0a;
-  --bg-elevated: #141414;
-  --bg-card: #1a1a1a;
+  /* Off-white warm canvas (Porsche-coded) */
+  --bg: #f5f3ee;
+  --bg-soft: #efece5;
+  --bg-elevated: #faf8f3;
+  --bg-card: #ffffff;
+  --bg-deep: #0a0a08;          /* used for inverted sections */
 
-  /* Foreground */
-  --fg: #ffffff;
-  --fg-strong: #e6e6e6;
-  --fg-body: #bbbbbb;
-  --fg-muted: #7e7e7e;
-  --fg-dim: #555555;
+  /* Foreground — warm near-black */
+  --fg: #0a0a08;
+  --fg-strong: #1a1a17;
+  --fg-body: #4a4a45;
+  --fg-muted: #807e76;
+  --fg-dim: #b8b5ac;
 
   /* Hairlines */
-  --line: #1f1f1f;
-  --line-strong: #2c2c2c;
-  --line-hover: #3c3c3c;
+  --line: #e3e0d6;
+  --line-strong: #cfcbbe;
+  --line-hover: #a8a499;
 
-  /* Stripe signature — adapted from BMW-M (cool/deep/oranje) */
-  --stripe-1: #0066b1;
-  --stripe-2: #1c69d4;
-  --stripe-3: #ff6b00;
-
-  /* Single-accent shortcut (the "oranje" of the name) */
-  --accent: #ff6b00;
-  --accent-hover: #ff8533;
+  /* Single restrained accent — Volvo-coded deep red */
+  --accent: #9a1f2c;
+  --accent-hover: #7a1923;
+  --accent-soft: rgba(154, 31, 44, 0.08);
 }
 
 @theme inline {
@@ -34,6 +31,7 @@
   --color-bg-soft: var(--bg-soft);
   --color-bg-elevated: var(--bg-elevated);
   --color-bg-card: var(--bg-card);
+  --color-bg-deep: var(--bg-deep);
   --color-fg: var(--fg);
   --color-fg-strong: var(--fg-strong);
   --color-fg-body: var(--fg-body);
@@ -42,164 +40,99 @@
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-line-hover: var(--line-hover);
-  --color-stripe-1: var(--stripe-1);
-  --color-stripe-2: var(--stripe-2);
-  --color-stripe-3: var(--stripe-3);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --font-display: var(--font-inter-tight);
+  --font-serif: var(--font-instrument);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
 html, body {
   background: var(--bg);
-  color: var(--fg-body);
+  color: var(--fg);
   font-family: var(--font-inter), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
 }
 
-.display {
-  font-family: var(--font-inter-tight), Inter, sans-serif;
-  font-weight: 800;
+.serif {
+  font-family: var(--font-instrument), "Times New Roman", serif;
+  font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--fg);
 }
 
-.display-tight {
-  font-family: var(--font-inter-tight), Inter, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--fg);
+.serif-italic {
+  font-family: var(--font-instrument), "Times New Roman", serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.025em;
+}
+
+.sans {
+  font-family: var(--font-inter), sans-serif;
 }
 
 .mono {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-feature-settings: "ss02";
 }
 
-/* Stripe signature — used as section divider, button accent, hero detail */
-.stripe-sig {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-}
-.stripe-sig::before,
-.stripe-sig::after,
-.stripe-sig > span {
-  content: "";
-  display: block;
-  height: 3px;
-  width: 14px;
-}
-.stripe-sig::before { background: var(--stripe-1); }
-.stripe-sig > span  { background: var(--stripe-2); }
-.stripe-sig::after  { background: var(--stripe-3); }
-
-/* Vertical variant for hero edge */
-.stripe-sig-v {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.stripe-sig-v::before,
-.stripe-sig-v::after,
-.stripe-sig-v > span {
-  content: "";
-  display: block;
-  width: 3px;
-  height: 14px;
-}
-.stripe-sig-v::before { background: var(--stripe-1); }
-.stripe-sig-v > span  { background: var(--stripe-2); }
-.stripe-sig-v::after  { background: var(--stripe-3); }
-
-/* Marquee — infinite horizontal scroll */
-.marquee {
-  display: flex;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee-track {
-  display: flex;
-  flex-shrink: 0;
-  gap: 3rem;
-  animation: marquee 40s linear infinite;
-  white-space: nowrap;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
 }
 
-/* Grain overlay for hero / dark surfaces */
-.grain {
-  position: relative;
-}
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
-  opacity: 0.04;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  z-index: 1;
-}
-
-/* Smooth scroll fade-in */
+/* Slow fade-in on scroll */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .rise {
-  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Magnetic button */
-.btn-magnetic {
+/* Underline-on-hover for text links */
+.tlink {
   position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 2px;
+  color: var(--fg);
+  transition: color 0.3s ease;
 }
-.btn-magnetic::before {
+.tlink::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: var(--accent-hover);
-  transform: translateY(101%);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  z-index: -1;
+  left: 0; bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--fg);
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.btn-magnetic:hover::before {
-  transform: translateY(0);
-}
+.tlink:hover::after { transform: scaleX(0); transform-origin: right; }
+.tlink--rev::after { transform: scaleX(0); transform-origin: right; }
+.tlink--rev:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* Subtle hover lift */
-.lift {
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.3s ease;
-}
-.lift:hover { transform: translateY(-2px); }
+/* Subtle hover */
+.lift { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.lift:hover { transform: translateY(-3px); }
 
-/* Section number — large faded background label */
-.section-num {
-  position: absolute;
-  font-family: var(--font-inter-tight), Inter, sans-serif;
-  font-weight: 800;
-  color: var(--line-strong);
-  font-size: clamp(12rem, 22vw, 28rem);
-  line-height: 0.8;
-  letter-spacing: -0.06em;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
+/* Image hover — slow zoom */
+.img-hover { overflow: hidden; }
+.img-hover img {
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+.img-hover:hover img { transform: scale(1.04); }
 
 ::selection {
   background: var(--accent);
-  color: #000;
+  color: var(--bg);
 }
