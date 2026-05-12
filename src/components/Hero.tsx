@@ -1,141 +1,127 @@
+import Link from "next/link";
 import { SHOP } from "@/config/shop";
-import Wordmark from "./Wordmark";
 
 export default function Hero() {
   const h = SHOP.hero;
   return (
-    <section className="relative isolate min-h-screen overflow-hidden bg-bg">
-      {/* Top nav */}
-      <header className="absolute inset-x-0 top-0 z-30">
-        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-6 pt-8 md:px-12 md:pt-10">
-          <Wordmark size="md" />
-          <nav className="hidden items-center gap-10 text-sm text-fg-body md:flex">
-            {[
-              ["Diensten", "#diensten"],
-              ["Werkplaats", "#werkplaats"],
-              ["Reviews", "#reviews"],
-              ["Contact", "#contact"],
-            ].map(([label, href]) => (
-              <a key={label} href={href} className="tlink tlink--rev">
-                {label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#boek"
-            className="tlink hidden md:inline-flex"
-            style={{ color: "var(--accent)" }}
-          >
-            APK boeken
-            <span aria-hidden>→</span>
-          </a>
-        </div>
-      </header>
-
-      {/* Hero content — two-column editorial */}
-      <div className="mx-auto grid min-h-screen w-full max-w-[1500px] grid-cols-1 px-6 pt-32 md:grid-cols-12 md:gap-12 md:px-12 md:pt-40">
-        {/* Left col: editorial text */}
-        <div className="md:col-span-6 md:py-20">
-          <div className="rise">
-            <div className="label">— Volvo Specialist · Sinds 1998</div>
+    <section className="grain relative isolate overflow-hidden border-b border-border bg-bg">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pb-24 pt-16 md:grid-cols-12 md:px-10 md:pt-24">
+        {/* Left col */}
+        <div className="md:col-span-7">
+          <div className="rise label flex items-center gap-3">
+            <span className="inline-block h-px w-10 bg-accent" />
+            {h.eyebrow}
           </div>
 
           <h1
-            className="rise serif mt-10 text-[clamp(3.5rem,8vw,8rem)] leading-[0.95] tracking-[-0.03em]"
+            className="rise display mt-8 text-[clamp(3.5rem,9vw,8rem)] leading-[0.88]"
             style={{ animationDelay: "0.1s" }}
           >
-            Volvo verdient
+            {h.headlineLines[0]}
             <br />
-            een{" "}
-            <span className="serif-italic" style={{ color: "var(--accent)" }}>
-              specialist.
-            </span>
+            {h.headlineLines[1]}
             <br />
-            Niet een dealer.
+            <span className="text-accent">{h.headlineLines[2]}</span>
           </h1>
 
           <p
-            className="rise mt-10 max-w-md text-lg font-light leading-relaxed text-fg-body"
+            className="rise mt-8 max-w-xl text-lg leading-relaxed text-fg-muted"
             style={{ animationDelay: "0.2s" }}
           >
-            Onafhankelijk Volvo-specialist in Nijmegen-Oost. Originele
-            Volvo-onderdelen, dealer-kwaliteit, zonder dealer-prijzen.
-            Klassieke 240 of moderne XC60 — wij kennen ze.
+            {h.sub}
           </p>
 
           <div
-            className="rise mt-12 flex flex-wrap items-center gap-8"
+            className="rise mt-10 flex flex-wrap items-center gap-4"
             style={{ animationDelay: "0.3s" }}
           >
-            <a
-              href="#boek"
-              className="inline-flex items-center gap-3 bg-fg px-8 py-4 text-sm font-medium text-bg transition-all hover:bg-accent"
+            <Link
+              href="/#boek"
+              className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-sm font-medium text-bg transition-colors hover:bg-accent-hover"
             >
-              Onderhoud boeken
-              <span aria-hidden>→</span>
-            </a>
-            <a href="tel:+31243231346" className="tlink text-sm">
-              <span
-                className="inline-block h-1.5 w-1.5 rounded-full"
-                style={{ background: "var(--accent)" }}
-              />
-              024 — 323 13 46
+              {h.primaryCta.label}
+              <span aria-hidden className="cta-arrow">→</span>
+            </Link>
+            <a
+              href={h.secondaryCta.href}
+              className="inline-flex items-center gap-3 rounded-full border border-border-strong px-7 py-4 text-sm text-fg transition-colors hover:border-accent"
+            >
+              <span className="inline-block h-2 w-2 rounded-full bg-accent" />
+              {h.secondaryCta.label}
             </a>
           </div>
 
           {/* Trust strip */}
           <div
-            className="rise mt-20 grid max-w-md grid-cols-2 gap-y-6 border-t border-line-strong pt-8"
+            className="rise mt-14 grid max-w-2xl grid-cols-2 gap-y-5 border-t border-border pt-8 sm:grid-cols-4"
             style={{ animationDelay: "0.4s" }}
           >
             {h.trustBadges.map((b) => (
               <div key={b.k}>
-                <div className="serif text-2xl">{b.k}</div>
-                <div className="label mt-1">{b.v}</div>
+                <div className="display text-xl tracking-wider">{b.k}</div>
+                <div className="mono mt-1 text-[10px] tracking-[0.15em] text-fg-muted">
+                  {b.v}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Right col: dominant photo */}
-        <div className="relative md:col-span-6">
+        {/* Right col — photo */}
+        <div className="relative md:col-span-5">
           <div
-            className="img-hover relative aspect-[3/4] w-full overflow-hidden md:absolute md:inset-y-0 md:right-0 md:aspect-auto md:h-full md:w-[55vw]"
+            className="img-hover relative aspect-[4/5] overflow-hidden rounded-sm border border-border"
             style={{ animationDelay: "0.2s" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85"
-              alt="Volvo werkplaats"
-              className="h-full w-full object-cover"
+              src={h.image}
+              alt="Werkplaats Oranje Garage"
+              className="absolute inset-0 h-full w-full object-cover grayscale contrast-110"
             />
-            {/* Caption overlay */}
-            <figcaption className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
-              <div className="bg-bg/90 px-4 py-2 backdrop-blur-sm">
-                <div className="label">Werkplaats · Nijmegen-Oost</div>
-                <div className="serif-italic mt-1 text-lg">51.83°N · 5.87°E</div>
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(10,11,13,0.15) 0%, rgba(10,11,13,0.85) 100%)",
+              }}
+            />
+            <div
+              className="absolute -left-12 -top-12 h-40 w-40 rounded-full blur-3xl"
+              style={{ background: "var(--accent)", opacity: 0.35 }}
+            />
+            <div className="absolute bottom-5 left-5 right-5 rounded-sm border border-border-strong bg-bg/85 p-5 backdrop-blur">
+              <div className="label">{h.statCard.label}</div>
+              <div className="mt-3 flex items-end justify-between">
+                <div>
+                  <div className="display text-4xl leading-none">
+                    {h.statCard.leftNum}
+                  </div>
+                  <div
+                    className="mono mt-1 text-[10px] tracking-[0.15em] text-fg-muted"
+                    dangerouslySetInnerHTML={{ __html: h.statCard.leftLabel }}
+                  />
+                </div>
+                <div className="text-right">
+                  <div className="display text-4xl leading-none text-accent">
+                    {h.statCard.rightNum}
+                  </div>
+                  <div className="mono mt-1 text-[10px] tracking-[0.15em] text-fg-muted">
+                    {h.statCard.rightLabel}
+                  </div>
+                </div>
               </div>
-            </figcaption>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom strip */}
-      <div className="relative z-10 border-t border-line bg-bg">
-        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-6 py-5 md:px-12">
-          <div className="label">Maandag tot Vrijdag · 08:00 — 17:00</div>
-          <div className="label hidden md:block">
-            240 · 740 · 850 · S60 · V70 · XC60 · XC70 · XC90 · V40 · V90
-          </div>
-          <div
-            className="label flex items-center gap-2"
-            style={{ color: "var(--accent)" }}
-          >
-            <span
-              className="inline-block h-1.5 w-1.5 animate-pulse rounded-full"
-              style={{ background: "var(--accent)" }}
-            />
-            OPEN
+      {/* Bottom ticker */}
+      <div className="relative z-10 border-t border-border">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 md:px-10">
+          <div className="label">{h.ticker}</div>
+          <div className="label" style={{ color: "var(--accent)" }}>
+            {h.openingShort}
           </div>
         </div>
       </div>

@@ -1,26 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, Geist_Mono } from "next/font/google";
+import { Inter, Bebas_Neue, JetBrains_Mono } from "next/font/google";
 import { SHOP } from "@/config/shop";
+import SiteNav from "@/components/SiteNav";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
-  weight: ["300", "400", "500", "600"],
 });
 
-const instrument = Instrument_Serif({
+const bebas = Bebas_Neue({
   subsets: ["latin"],
-  variable: "--font-instrument",
+  variable: "--font-bebas",
   display: "swap",
   weight: "400",
-  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -35,9 +35,13 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${inter.variable} ${instrument.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${bebas.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteNav />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

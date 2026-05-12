@@ -1,122 +1,85 @@
 import { SHOP } from "@/config/shop";
-import Wordmark from "./Wordmark";
+import Link from "next/link";
 
 export default function Footer() {
   const f = SHOP.footer;
   const c = SHOP.contact;
   return (
-    <footer style={{ background: "var(--bg-deep)", color: "var(--bg)" }}>
-      <div className="mx-auto w-full max-w-[1500px] px-6 pt-28 pb-10 md:px-12 md:pt-36">
-        {/* CTA strip */}
-        <div className="grid grid-cols-1 items-end gap-12 border-b pb-20 md:grid-cols-12 md:gap-16"
-             style={{ borderColor: "rgba(245,243,238,0.18)" }}>
+    <footer className="border-t border-border bg-bg">
+      <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10">
+        {/* Top CTA */}
+        <div className="grid grid-cols-1 items-end gap-10 border-b border-border pb-16 md:grid-cols-12">
           <div className="md:col-span-8">
-            <div className="label" style={{ color: "rgba(245,243,238,0.5)" }}>
-              — Laatste stap
-            </div>
-            <h3
-              className="serif mt-6 text-4xl leading-[1.05] tracking-[-0.025em] md:text-6xl"
-              style={{ color: "var(--bg)" }}
-            >
-              Klaar voor{" "}
-              <span className="serif-italic" style={{ color: "var(--accent)" }}>
-                eerlijk
-              </span>{" "}
-              vakwerk?
+            <div className="label">— Klaar voor onderhoud?</div>
+            <h3 className="display mt-5 text-4xl leading-[0.95] md:text-6xl">
+              Loop binnen of <span className="text-accent">boek online.</span>
             </h3>
           </div>
-          <div className="flex flex-wrap items-center gap-8 md:col-span-4 md:justify-end">
+          <div className="flex flex-wrap items-center gap-4 md:col-span-4 md:justify-end">
             <a
               href={c.phoneHref}
-              className="serif-italic text-2xl"
-              style={{ color: "var(--bg)" }}
+              className="inline-flex items-center gap-3 border border-border-strong px-6 py-3 text-sm text-fg transition-colors hover:border-accent hover:text-accent"
             >
               {c.phoneDisplay}
             </a>
-            <a
-              href="#boek"
-              className="inline-flex items-center gap-3 border px-7 py-4 text-sm font-medium transition-colors hover:bg-bg hover:text-fg"
-              style={{
-                borderColor: "rgba(245,243,238,0.3)",
-                color: "var(--bg)",
-              }}
+            <Link
+              href="/#boek"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-bg transition-colors hover:bg-accent-hover"
             >
-              APK boeken <span aria-hidden>→</span>
-            </a>
+              APK boeken
+              <span aria-hidden className="cta-arrow">→</span>
+            </Link>
           </div>
         </div>
 
         {/* Main grid */}
-        <div className="grid grid-cols-1 gap-12 py-20 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Wordmark size="lg" inverted />
-            <p
-              className="mt-10 max-w-md text-sm font-light leading-relaxed"
-              style={{ color: "rgba(245,243,238,0.7)" }}
-            >
+            <div className="flex items-center gap-3">
+              <span className="inline-block h-6 w-6 rounded-sm bg-accent" />
+              <span className="display text-2xl tracking-wider">
+                ORANJE GARAGE
+              </span>
+            </div>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-muted">
               {f.tagline}
             </p>
           </div>
 
           <div className="md:col-span-2">
-            <div
-              className="label"
-              style={{ color: "rgba(245,243,238,0.5)" }}
-            >
-              — Sitemap
-            </div>
-            <ul className="mt-6 space-y-3 text-sm">
+            <div className="label">— Sitemap</div>
+            <ul className="mt-5 space-y-3 text-sm">
               {[
-                ["Diensten", "#diensten"],
-                ["Werkplaats", "#werkplaats"],
-                ["Reviews", "#reviews"],
-                ["Boeken", "#boek"],
-                ["Contact", "#contact"],
+                ["Home", "/"],
+                ["Diensten", "/diensten"],
+                ["APK Volvo", "/apk"],
+                ["Werkplaats", "/werkplaats"],
+                ["Reviews", "/reviews"],
               ].map(([label, href]) => (
                 <li key={label}>
-                  <a
+                  <Link
                     href={href}
-                    className="font-light transition-colors hover:text-accent"
-                    style={{ color: "rgba(245,243,238,0.8)" }}
+                    className="text-fg-muted transition-colors hover:text-accent"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="md:col-span-2">
-            <div
-              className="label"
-              style={{ color: "rgba(245,243,238,0.5)" }}
-            >
-              — Erkend
-            </div>
-            <ul className="mt-6 space-y-3 text-sm">
+            <div className="label">— Erkend</div>
+            <ul className="mt-5 space-y-3 text-sm text-fg-muted">
               {f.erkend.map((e) => (
-                <li
-                  key={e}
-                  className="font-light"
-                  style={{ color: "rgba(245,243,238,0.8)" }}
-                >
-                  {e}
-                </li>
+                <li key={e}>{e}</li>
               ))}
             </ul>
           </div>
 
           <div className="md:col-span-3">
-            <div
-              className="label"
-              style={{ color: "rgba(245,243,238,0.5)" }}
-            >
-              — Contact
-            </div>
-            <address
-              className="mt-6 not-italic space-y-3 text-sm font-light"
-              style={{ color: "rgba(245,243,238,0.8)" }}
-            >
+            <div className="label">— Contact</div>
+            <address className="mt-5 not-italic space-y-3 text-sm text-fg-muted">
               <div>{c.address.line1}</div>
               <div>{c.address.line2}</div>
               <div className="pt-2">
@@ -133,29 +96,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div
-          className="flex flex-col items-start justify-between gap-6 border-t pt-8 md:flex-row md:items-center"
-          style={{ borderColor: "rgba(245,243,238,0.18)" }}
-        >
-          <div
-            className="label flex flex-wrap items-center gap-x-6 gap-y-2"
-            style={{ color: "rgba(245,243,238,0.5)" }}
-          >
-            <span>© 2026 · Oranje Garage van der Peijl</span>
-            <span>· KvK {f.kvk}</span>
-            <span>· Nijmegen-Oost</span>
+        <div className="flex flex-col items-start justify-between gap-3 border-t border-border pt-8 md:flex-row md:items-center">
+          <div className="label flex flex-wrap items-center gap-x-5 gap-y-1">
+            <span>© 2026 · ORANJE GARAGE VAN DER PEIJL</span>
+            <span>· KVK {f.kvk}</span>
           </div>
-          <div
-            className="flex items-center gap-8 text-xs"
-            style={{ color: "rgba(245,243,238,0.5)" }}
-          >
-            <a href="#" className="hover:opacity-100 opacity-70 font-light">
-              Algemene voorwaarden
-            </a>
-            <a href="#" className="hover:opacity-100 opacity-70 font-light">
-              Privacy
-            </a>
+          <div className="label flex items-center gap-5">
+            <a href="#" className="hover:text-fg">Algemene voorwaarden</a>
+            <a href="#" className="hover:text-fg">Privacy</a>
           </div>
         </div>
       </div>
